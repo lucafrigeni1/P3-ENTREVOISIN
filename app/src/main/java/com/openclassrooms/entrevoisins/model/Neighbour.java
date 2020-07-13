@@ -1,11 +1,14 @@
 package com.openclassrooms.entrevoisins.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Objects;
 
 /**
  * Model object representing a Neighbour
  */
-public class Neighbour {
+public class Neighbour implements Parcelable {
 
     /** Identifier */
     private long id;
@@ -25,6 +28,8 @@ public class Neighbour {
     /** About me */
     private String aboutMe;
 
+    private Boolean isFavorite;
+
     /**
      * Constructor
      * @param id
@@ -32,13 +37,14 @@ public class Neighbour {
      * @param avatarUrl
      */
     public Neighbour(long id, String name, String avatarUrl, String address,
-                     String phoneNumber, String aboutMe) {
+                     String phoneNumber, String aboutMe, Boolean isFavorite) {
         this.id = id;
         this.name = name;
         this.avatarUrl = avatarUrl;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.aboutMe = aboutMe;
+        this.isFavorite = isFavorite;
     }
 
     public long getId() {
@@ -89,6 +95,14 @@ public class Neighbour {
         this.aboutMe = aboutMe;
     }
 
+    public Boolean getFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(Boolean favorite) {
+        isFavorite = favorite;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -101,4 +115,40 @@ public class Neighbour {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(id);
+        parcel.writeString(name);
+        parcel.writeString(avatarUrl);
+        parcel.writeString(address);
+        parcel.writeString(phoneNumber);
+        parcel.writeString(aboutMe);
+    }
+
+    protected Neighbour(Parcel in) {
+        id = in.readLong();
+        name = in.readString();
+        avatarUrl = in.readString();
+        address = in.readString();
+        phoneNumber = in.readString();
+        aboutMe = in.readString();
+    }
+
+    public static final Creator<Neighbour> CREATOR = new Creator<Neighbour>() {
+        @Override
+        public Neighbour createFromParcel(Parcel in) {
+            return new Neighbour(in);
+        }
+
+        @Override
+        public Neighbour[] newArray(int size) {
+            return new Neighbour[size];
+        }
+    };
 }

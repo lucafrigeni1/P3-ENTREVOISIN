@@ -13,7 +13,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
-public class NeighbourProfil extends AppCompatActivity {
+public class NeighbourProfilActivity extends AppCompatActivity {
 
     private ImageView profil;
     private ImageButton bReturn;
@@ -25,6 +25,7 @@ public class NeighbourProfil extends AppCompatActivity {
     private TextView socialMedia;
     private TextView description;
     private Neighbour mNeighbour;
+    Boolean isFavorite;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -35,6 +36,7 @@ public class NeighbourProfil extends AppCompatActivity {
         neighbourImage();
         neighbourInformations();
         setbReturn();
+        setbAddToFavourite();
     }
 
     private void findview() {
@@ -54,7 +56,7 @@ public class NeighbourProfil extends AppCompatActivity {
     }
 
     private void neighbourImage(){
-        Glide.with(profil.getContext())
+        Glide.with(this)
                 .load(mNeighbour.getAvatarUrl())
                 .apply(RequestOptions.circleCropTransform())
                 .into(profil);
@@ -65,7 +67,7 @@ public class NeighbourProfil extends AppCompatActivity {
         name2.setText(mNeighbour.getName());
         adress.setText(mNeighbour.getAddress());
         phoneNumber.setText(mNeighbour.getPhoneNumber());
-        socialMedia.setText(mNeighbour.getName() + "/Facebook.com");
+        socialMedia.setText("www.facebook.fr/" + mNeighbour.getName());
         description.setText(mNeighbour.getAboutMe());
     }
 
@@ -76,6 +78,10 @@ public class NeighbourProfil extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void setbAddToFavourite(){
+        
     }
 
 }

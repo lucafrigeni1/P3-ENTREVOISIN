@@ -24,8 +24,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.support.v4.content.ContextCompat.startActivity;
-
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
@@ -59,10 +57,10 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
         holder.mNeighbourLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), NeighbourProfil.class);
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), NeighbourProfilActivity.class);
                 intent.putExtra("Neighbour", (Parcelable) neighbour);
-                v.getContext().startActivity(intent);
+                view.getContext().startActivity(intent);
             }
         });
     }
