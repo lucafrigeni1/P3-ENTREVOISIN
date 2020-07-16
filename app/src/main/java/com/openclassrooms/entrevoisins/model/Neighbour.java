@@ -28,7 +28,7 @@ public class Neighbour implements Parcelable {
     /** About me */
     private String aboutMe;
 
-    private Boolean isFavorite;
+    private Boolean isFavorite = false;
 
     /**
      * Constructor
@@ -129,6 +129,7 @@ public class Neighbour implements Parcelable {
         parcel.writeString(address);
         parcel.writeString(phoneNumber);
         parcel.writeString(aboutMe);
+        parcel.writeString(String.valueOf(isFavorite));
     }
 
     protected Neighbour(Parcel in) {
@@ -138,6 +139,7 @@ public class Neighbour implements Parcelable {
         address = in.readString();
         phoneNumber = in.readString();
         aboutMe = in.readString();
+        isFavorite = Boolean.valueOf(in.readString());
     }
 
     public static final Creator<Neighbour> CREATOR = new Creator<Neighbour>() {

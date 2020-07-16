@@ -32,7 +32,6 @@
         android:layout_marginBottom="30dp"
         tools:text="Aaaaaaa"
         android:textSize="30dp"
-        android:textStyle="bold"
         android:textColor="@color/white"/>
 
     <android.support.design.widget.FloatingActionButton
