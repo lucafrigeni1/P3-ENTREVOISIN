@@ -82,10 +82,10 @@ public class NeighbourProfilActivity extends AppCompatActivity {
     }
 
     private void neighbourState(){
-        if (mNeighbour.getFavorite() == false){
-            bAddToFavorite.setImageResource(R.drawable.ic_star_border_white_24dp);
-        }else {
+        if (mNeighbour.isFavorite()){
             bAddToFavorite.setImageResource(R.drawable.ic_star_white_24dp);
+        }else {
+            bAddToFavorite.setImageResource(R.drawable.ic_star_border_white_24dp);
         }
     }
 
@@ -94,16 +94,16 @@ public class NeighbourProfilActivity extends AppCompatActivity {
     }
 
     private void setFavoriteNeighbour(){
-        if (mNeighbour.getFavorite() == false){
-            mNeighbour.setFavorite(true);
-            Toast.makeText(this,"Ajouté aux favoris",Toast.LENGTH_SHORT).show();
-            bAddToFavorite.setImageResource(R.drawable.ic_star_white_24dp);
-            mApiService.addFavoriteNeighbour(mNeighbour);
-        }else {
+        if (mNeighbour.isFavorite()){
             mNeighbour.setFavorite(false);
             Toast.makeText(this,"Supprimé des favoris",Toast.LENGTH_SHORT).show();
             bAddToFavorite.setImageResource(R.drawable.ic_star_border_white_24dp);
             mApiService.deleteFavoriteNeighbour(mNeighbour);
+        }else {
+            mNeighbour.setFavorite(true);
+            Toast.makeText(this,"Ajouté aux favoris",Toast.LENGTH_SHORT).show();
+            bAddToFavorite.setImageResource(R.drawable.ic_star_white_24dp);
+            mApiService.addFavoriteNeighbour(mNeighbour);
         }
     }
 }

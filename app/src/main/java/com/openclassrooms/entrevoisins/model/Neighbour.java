@@ -95,7 +95,7 @@ public class Neighbour implements Parcelable {
         this.aboutMe = aboutMe;
     }
 
-    public Boolean getFavorite() {
+    public Boolean isFavorite() {
         return isFavorite;
     }
 

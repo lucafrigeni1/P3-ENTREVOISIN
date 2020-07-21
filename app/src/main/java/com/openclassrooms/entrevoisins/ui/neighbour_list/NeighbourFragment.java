@@ -24,7 +24,7 @@ import java.util.List;
 
 import static android.support.v4.content.ContextCompat.startActivity;
 
-
+//TODO combiner les 2 frags + modif page adapter
 public class NeighbourFragment extends Fragment {
 
     private NeighbourApiService mApiService;

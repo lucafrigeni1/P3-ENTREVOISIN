@@ -58,19 +58,16 @@ public class NeighbourServiceTest {
 
     @Test
     public void addNeighbourToFavoriteWithSuccess() {
-        Neighbour favoriteNeighbourToAdd = service.getFavoriteNeighbour().get(0);
+        Neighbour favoriteNeighbourToAdd = service.getNeighbours().get(0);
         service.addFavoriteNeighbour(favoriteNeighbourToAdd);
         assertTrue(service.getFavoriteNeighbour().contains(favoriteNeighbourToAdd));
     }
 
     @Test
     public void deleteNeighbourToFavoriteWithSuccess() {
-        Neighbour favoriteNeighbourToDelete = service.getFavoriteNeighbour().get(0);
+        Neighbour favoriteNeighbourToDelete = service.getNeighbours().get(0);
+        service.addFavoriteNeighbour(favoriteNeighbourToDelete);
         service.deleteFavoriteNeighbour(favoriteNeighbourToDelete);
         assertFalse(service.getFavoriteNeighbour().contains(favoriteNeighbourToDelete));
-    }
-
-    @Test
-    public void getNeighbourProfilWithSuccess() {
     }
 }
