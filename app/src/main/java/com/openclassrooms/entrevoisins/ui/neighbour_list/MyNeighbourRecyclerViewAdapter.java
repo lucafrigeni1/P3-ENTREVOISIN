@@ -28,9 +28,11 @@ import butterknife.ButterKnife;
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
+    private Boolean mFavoritePage;
 
-    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items) {
+    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, Boolean favoritePage) {
         mNeighbours = items;
+        mFavoritePage = favoritePage;
     }
 
     @Override
@@ -49,21 +51,19 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mNeighbourAvatar);
 
-        holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.mDeleteButton.setOnClickListener(v -> {
+            if (mFavoritePage){
+                EventBus.getDefault().post(new DeleteFavoriteNeighbourEvent(neighbour));
+            } else {
                 EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
                 EventBus.getDefault().post(new DeleteFavoriteNeighbourEvent(neighbour));
             }
         });
 
-        holder.mNeighbourLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), NeighbourProfilActivity.class);
-                intent.putExtra("Neighbour", (Parcelable) neighbour);
-                view.getContext().startActivity(intent);
-            }
+        holder.mNeighbourLayout.setOnClickListener((View.OnClickListener) view -> {
+            Intent intent = new Intent(view.getContext(), NeighbourProfilActivity.class);
+            intent.putExtra("Neighbour", (Parcelable) neighbour);
+            view.getContext().startActivity(intent);
         });
     }
 
