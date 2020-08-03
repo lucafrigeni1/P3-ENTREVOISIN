@@ -43,13 +43,6 @@ public class NeighbourServiceTest {
     }
 
     @Test
-    public void addNeighbourWithSuccess() {
-        Neighbour neighbourToAdd = service.getNeighbours().get(0);
-        service.createNeighbour(neighbourToAdd);
-        assertTrue(service.getNeighbours().contains(neighbourToAdd));
-    }
-
-    @Test
     public void getFavoriteNeighboursWithSuccess() {
         List<Neighbour> favoriteNeighbours = service.getFavoriteNeighbour();
         List<Neighbour> expectedNeighbours = DummyNeighbourGenerator.FAVORITE_NEIGHBOURS;
